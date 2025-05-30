@@ -7,8 +7,6 @@ from werkzeug.utils import secure_filename
 
 
 app = Flask(__name__)
-app.jinja_env.auto_reload = True
-app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.secret_key = 'your-secret-key'
 
 # MongoDB Setup
