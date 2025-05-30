@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Post a Book</title>
+</head>
+<body>
+    <h2>Post a Book</h2>
+   <form method="POST" enctype="multipart/form-data">
+    Title: <input type="text" name="title" required><br>
+    Author: <input type="text" name="author" required><br>
+    Description:<br>
+    <textarea name="description" rows="4" cols="50"></textarea><br>
+    Book Cover Image: <input type="file" name="image" accept="image/*"><br>
+    <button type="submit">Submit</button>
+</form>
+
+    <p><a href="{{ url_for('home') }}">Back to Home</a></p>
+</body>
+</html>
+

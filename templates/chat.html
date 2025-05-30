@@ -1,0 +1,11 @@
+<h2>Chat about "{{ book.title }}"</h2>
+<div style="border:1px solid #ccc; padding:10px; height:300px; overflow:auto;">
+  {% for msg in messages %}
+    <p><strong>{{ msg.sender }}:</strong> {{ msg.text }}</p>
+  {% endfor %}
+</div>
+<form method="POST">
+  <input name="message" required style="width:80%;">
+  <button type="submit">Send</button>
+</form>
+<a href="{{ url_for('my_books') }}">Back</a>

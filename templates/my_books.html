@@ -1,0 +1,30 @@
+<h2>My Borrowed Books</h2>
+<ul>
+  {% for book in borrowed_books %}
+    <li>
+      <strong>{{ book.title }}</strong> by {{ book.author }}
+      <form action="{{ url_for('return_book', book_id=book._id) }}" method="POST" style="display:inline">
+        <button type="submit">Return</button>
+      </form>
+      <a href="{{ url_for('chat', book_id=book._id) }}">Chat with Owner</a>
+    </li>
+  {% else %}
+    <li>You haven’t borrowed any books.</li>
+  {% endfor %}
+</ul>
+
+<h2>My Posted Books</h2>
+<ul>
+  {% for book in posted_books %}
+    <li>
+      <strong>{{ book.title }}</strong>
+      ({{ 'Available' if book.available else 'Borrowed by ' + book.borrower }})
+      {% if not book.available %}
+        <a href="{{ url_for('chat', book_id=book._id) }}">Chat with Borrower</a>
+      {% endif %}
+    </li>
+  {% else %}
+    <li>You haven’t posted any books.</li>
+  {% endfor %}
+</ul>
+<a href="{{ url_for('view_books') }}">Browse More Books</a>

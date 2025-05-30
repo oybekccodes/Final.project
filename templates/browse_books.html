@@ -1,0 +1,29 @@
+
+<h2>Available Books</h2>
+
+ <form method="GET" action="{{ url_for('view_books') }}">
+   <input type="text" name="q" placeholder="Search Title or Author" value="{{ request.args.get('q', '') }}">
+   <button type="submit">Search</button>
+ </form>
+<ul>
+  {% for book in books %}
+    <li>
+      <strong>{{ book['title'] }}</strong> by {{ book['author'] }} <br>
+      Posted by: {{ book['owner'] }}
+      {% if book.get('image') %}
+        <br><img src="{{ url_for('static', filename=book['image'].split('static/')[-1]) }}" width="100">
+      {% endif %}
+
+      {% if session.get('username') != book['owner'] %}
+        <form action="{{ url_for('borrow_book', book_id=book['_id']) }}" method="POST">
+          <button type="submit">Request to Borrow</button>
+        </form>
+      {% else %}
+        <em>This is your book</em>
+      {% endif %}
+    </li>
+  {% else %}
+    <li>No books found.</li>
+  {% endfor %}
+</ul>
+

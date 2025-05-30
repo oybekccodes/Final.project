@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Exchange - Home</title>
+</head>
+<body>
+    <h1>Welcome to the Book Exchange</h1>
+
+    {% if username %}
+        <p>Hello, {{ username }}!</p>
+        <a href="{{ url_for('logout') }}">Logout</a> |
+        <a href="{{ url_for('post_book') }}">Post a Book</a> |
+        <a href="{{ url_for('view_books') }}">Browse Books</a> |
+        <a href="{{ url_for('my_books') }}">My Books</a>
+    {% else %}
+        <p><a href="{{ url_for('login') }}">Login</a> or <a href="{{ url_for('register') }}">Register</a> to get started.</p>
+    {% endif %}
+
+    <!-- navbar -->
+     {% if username %}
+    <a href="{{ url_for('profile') }}">My Profile</a> |
+    <a href="{{ url_for('logout') }}">Logout</a>
+  {% else %}
+    <a href="{{ url_for('login') }}">Login</a>
+  {% endif %}
+ 
+</body>
+</html>

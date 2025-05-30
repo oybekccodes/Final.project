@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ username }}'s Profile</title>
+</head>
+<body>
+    <h1>Welcome, {{ username }}</h1>
+
+    <h2>📚 Your Posted Books</h2>
+    <ul>
+        {% for book in posted_books %}
+            <li>
+                <strong>{{ book.title }}</strong> by {{ book.author }}
+                {% if book.image %}
+                    <br><img src="{{ url_for('static', filename=book.image.split('static/')[-1]) }}" width="80">
+                {% endif %}
+                <br>Status: {{ 'Available' if book.available else 'Borrowed by ' ~ book.get('borrower', '?') }}
+                <!-- Add edit/delete links later -->
+            </li>
+        {% else %}
+            <li>You haven’t posted any books.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>📖 Your Borrowed Books</h2>
+    <ul>
+        {% for book in borrowed_books %}
+            <li>
+                <strong>{{ book.title }}</strong> by {{ book.author }}
+                <form action="{{ url_for('return_book', book_id=book._id) }}" method="POST" style="display:inline">
+                    <button type="submit">Return</button>
+                </form>
+            </li>
+        {% else %}
+            <li>You haven’t borrowed any books.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('view_books') }}">← Browse Books</a>
+</body>
+</html>
