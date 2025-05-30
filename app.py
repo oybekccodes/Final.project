@@ -11,7 +11,7 @@ app.secret_key = 'your-secret-key'
 
 # MongoDB Setup
 client = MongoClient("mongodb://localhost:27017/")
-db = client['book_exchange']
+db = client['book_exchange']    
 users_collection = db['users']
 books_collection=db['books']
 messages_collection=db['messages']
